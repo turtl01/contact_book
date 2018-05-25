@@ -13,15 +13,25 @@ public class Main {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Input command");
         Boolean isLive = true;
-        //DataBase database = new DataBase();
-        User user = new User("dasd", "dasdasd", "dsada", 1231,123);
-        user.show();
-/*
+
         while(isLive){
+            User user = null;
             String inputLine = bufferedReader.readLine();
             switch (inputLine){
-                case "adduser":
+                case "add":
+                    String first_name = bufferedReader.readLine();
+                    String last_name = bufferedReader.readLine();
+                    String email = bufferedReader.readLine();
+                    int phone_number = Integer.parseInt(bufferedReader.readLine());
+                    String data_of_birth = bufferedReader.readLine();
+                    System.out.println(first_name);
+                    user = new User(first_name, last_name, email, phone_number, data_of_birth);
+                    user.add();
                     break;
+                case "delete":
+                    int id = Integer.parseInt(bufferedReader.readLine());
+                    user = new User(id);
+                    user.delete();
                 case "exit":
                     System.out.println("Досвидание епта");
                     isLive = false;
@@ -39,7 +49,7 @@ public class Main {
                     System.out.println("Please input a command");
                     break;
             }
-        }*/
+        }
     }
 
 }
