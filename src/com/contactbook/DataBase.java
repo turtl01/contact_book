@@ -47,4 +47,20 @@ public class DataBase {
             e.printStackTrace();
         }
     }
+
+    public void update(int id, String first_name, String last_name,String email, int phone_number, String data_of_birth) {
+        String sql = "UPDATE warehouses "+table_name+"  first_name = ? , " + "last_name = ? " + "email = ? " + "phone_number = ? " + "data_of_birth = ? " + "WHERE id = ?";
+        try (Connection connection = this.conn;
+             PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            pstmt.setString(1, first_name);
+            pstmt.setString(2, last_name);
+            pstmt.setString(3, email);
+            pstmt.setInt(4, phone_number);
+            pstmt.setString(5, data_of_birth);
+            pstmt.setInt(6, id);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

@@ -24,7 +24,6 @@ public class Main {
                     String email = bufferedReader.readLine();
                     int phone_number = Integer.parseInt(bufferedReader.readLine());
                     String data_of_birth = bufferedReader.readLine();
-                    System.out.println(first_name);
                     user = new User(first_name, last_name, email, phone_number, data_of_birth);
                     user.add();
                     break;
@@ -32,6 +31,15 @@ public class Main {
                     int id = Integer.parseInt(bufferedReader.readLine());
                     user = new User(id);
                     user.delete();
+                case "update":
+                    int id = Integer.parseInt(bufferedReader.readLine());
+                    String first_name = bufferedReader.readLine();
+                    String last_name = bufferedReader.readLine();
+                    String email = bufferedReader.readLine();
+                    int phone_number = Integer.parseInt(bufferedReader.readLine());
+                    String data_of_birth = bufferedReader.readLine();
+                    user = new User(id, first_name, last_name, email, phone_number, data_of_birth);
+                    user.update();
                 case "exit":
                     System.out.println("Досвидание епта");
                     isLive = false;

@@ -39,4 +39,8 @@ public class User {
         String sql = "DELETE FROM "+table_name+" WHERE id = ?";
         db.delete(sql, id);
     }
+    public void update() throws SQLException, ClassNotFoundException {
+        DataBase db = new DataBase(table_name);
+        db.update(id, first_name, last_name, email, phone_number, data_of_birth);
+    }
 }
