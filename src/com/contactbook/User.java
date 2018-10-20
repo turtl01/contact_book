@@ -24,7 +24,15 @@ public class User {
         this.id = id;
     }
 
+    public User(String first_name, String last_name, String email, int phone_number, String data_of_birth, int id) {
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.email = email;
+        this.phone_number = phone_number;
+        this.data_of_birth = data_of_birth;
+        this.id = id;
 
+    }
     public void show(){
         System.out.println(this.first_name + " " + last_name + " " + email + " " + phone_number + " " + data_of_birth);
     }
@@ -41,6 +49,6 @@ public class User {
     }
     public void update() throws SQLException, ClassNotFoundException {
         DataBase db = new DataBase(table_name);
-        db.update(id, first_name, last_name, email, phone_number, data_of_birth);
+        db.update(first_name, last_name, email, phone_number, data_of_birth, id );
     }
 }

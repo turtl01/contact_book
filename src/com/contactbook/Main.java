@@ -12,39 +12,44 @@ public class Main {
 
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Input command");
-        Boolean isLive = true;
+        Boolean isLive =  true;
 
         while(isLive){
             User user = null;
             String inputLine = bufferedReader.readLine();
+            int id, phone_number;
+            String first_name, last_name, email, data_of_birth;
             switch (inputLine){
                 case "add":
-                    String first_name = bufferedReader.readLine();
-                    String last_name = bufferedReader.readLine();
-                    String email = bufferedReader.readLine();
-                    int phone_number = Integer.parseInt(bufferedReader.readLine());
-                    String data_of_birth = bufferedReader.readLine();
+                    first_name = bufferedReader.readLine();
+                    last_name = bufferedReader.readLine();
+                    email = bufferedReader.readLine();
+                    phone_number = Integer.parseInt(bufferedReader.readLine());
+                    data_of_birth = bufferedReader.readLine();
                     user = new User(first_name, last_name, email, phone_number, data_of_birth);
                     user.add();
                     break;
                 case "delete":
-                    int id = Integer.parseInt(bufferedReader.readLine());
+                    id = Integer.parseInt(bufferedReader.readLine());
                     user = new User(id);
                     user.delete();
+                    break;
                 case "update":
-                    int id = Integer.parseInt(bufferedReader.readLine());
-                    String first_name = bufferedReader.readLine();
-                    String last_name = bufferedReader.readLine();
-                    String email = bufferedReader.readLine();
-                    int phone_number = Integer.parseInt(bufferedReader.readLine());
-                    String data_of_birth = bufferedReader.readLine();
-                    user = new User(id, first_name, last_name, email, phone_number, data_of_birth);
+                    first_name = bufferedReader.readLine();
+                    last_name = bufferedReader.readLine();
+                    email = bufferedReader.readLine();
+                    phone_number = Integer.parseInt(bufferedReader.readLine());
+                    data_of_birth = bufferedReader.readLine();
+                    id = Integer.parseInt(bufferedReader.readLine());
+                    user = new User(first_name, last_name, email, phone_number, data_of_birth, id);
                     user.update();
+                    break;
                 case "exit":
                     System.out.println("Досвидание епта");
                     isLive = false;
                     break;
                 case "user":
+                    String sql = "SELECT * FROM user ";
                     System.out.println("user");
                     break;
                 case "help":
