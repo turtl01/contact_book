@@ -3,16 +3,16 @@ package com.contactbook;
 import java.sql.*;
 
 public class DataBase {
-    private final String table_name;
     public Connection conn;
     public Statement statmt;
+    private final String table_name = "users";
 
-    public DataBase(String table_name) throws ClassNotFoundException, SQLException{
+
+    public DataBase() throws ClassNotFoundException, SQLException{
         conn = null;
         Class.forName("org.sqlite.JDBC");
         this.conn = DriverManager.getConnection("jdbc:sqlite:./db/contact_book.db");
-        System.out.println("База подключенна");
-        this.table_name = table_name;
+        System.out.println("готово");
     }
 
 
@@ -45,6 +45,27 @@ public class DataBase {
             statement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+    public void addTable(String table) throws SQLException {
+        statmt = conn.createStatement();
+        statmt.execute("CREATE TABLE if not exists " + table+ " ('id' INTEGER PRIMARY KEY AUTOINCREMENT, 'name' text, 'phone' INT);");
+
+    }
+    public void select(String table) throws SQLException {
+        String sql = "SELECT * FROM " + table;
+        try (Connection connection = this.conn;
+             PreparedStatement pstmt = connection.prepareStatement(sql);
+             ResultSet rs    = pstmt.executeQuery()){
+
+
+            // loop through the result set
+            while (rs.next()) {
+                System.out.println(rs.getInt("id") +  "\t" +
+                        rs.getString("first_name"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
     }
 
