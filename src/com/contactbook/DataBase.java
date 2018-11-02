@@ -15,13 +15,6 @@ public class DataBase {
         System.out.println("готово");
     }
 
-
-    public void select() throws SQLException {
-        String sql = "SELECT * FROM user ";
-
-        System.out.println("user добавлен");
-    }
-
     public void insert(String first_name, String last_name,String email, int phone_number, String data_of_birth) {
         String sql = "INSERT INTO "+table_name+"('first_name', 'first_family', 'email', 'phone_number', 'date_of_birth' ) VALUES(?,?,?,?,?)";
 
@@ -57,18 +50,35 @@ public class DataBase {
         try (Connection connection = this.conn;
              PreparedStatement pstmt = connection.prepareStatement(sql);
              ResultSet rs    = pstmt.executeQuery()){
-
-
-            // loop through the result set
             while (rs.next()) {
-                System.out.println(rs.getInt("id") +  "\t" +
-                        rs.getString("first_name"));
+                System.out.println(rs.getInt("id") +  " (номер ID)      " +
+                        rs.getString("first_name") + " (Имя)        " +
+                        rs.getString("first_family")  + " (Фамилия)       " +
+                        rs.getString("email")  + " (Email)       " +
+                        rs.getString("phone_number")  + " (Номер телефона)      " +
+                        rs.getString("date_of_birth") + " (Дата рождения)       ");
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
+    public void selectid(String table, int id) throws SQLException {
+        String sql = "SELECT id FROM " + table;
+        try (Connection connection = this.conn;
+             PreparedStatement pstmt = connection.prepareStatement(sql);
+             ResultSet rs  = pstmt.executeQuery()){
 
+                System.out.println(rs.getInt("id") +  " (номер ID)      " +
+                        rs.getString("first_name") + " (Имя)        " +
+                        rs.getString("first_family")  + " (Фамилия)       " +
+                        rs.getString("email")  + " (Email)       " +
+                        rs.getString("phone_number")  + " (Номер телефона)      " +
+                        rs.getString("date_of_birth") + " (Дата рождения)       ");
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
     public void update(String first_name, String last_name,String email, int phone_number, String data_of_birth, int id ) {
         String sql = "UPDATE "+table_name+" SET first_name = ?, first_family = ?, email = ?, phone_number = ?, date_of_birth = ? WHERE id = ?";
         try (Connection connection = this.conn;
